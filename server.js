@@ -15,25 +15,25 @@ app.listen(3000, () => {
   console.log("Listening");
 });
 
-/*mongoose
+mongoose
   .connect(
-    "mongodb+srv://ryanmalone192:KAFVLG0JaapFgWhK@cluster0.j3hawrv.mongodb.net/?retryWrites=true&w=majority/cities"
+    "mongodb+srv://ryanmalone192:KAFVLG0JaapFgWhK@cities.vn3d5li.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((error) => {
     console.log("Couldn't connect to MongoDB", error);
-  });*/
+  });
 
-mongoose
+/*mongoose
   .connect("mongodb://localhost/cities")
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((error) => {
     console.log("Couldn't connect to MongoDB", error);
-  });
+  });*/
 
 const citySchema = new mongoose.Schema({
   /*_id: mongoose.SchemaTypes.ObjectId,*/
@@ -100,16 +100,13 @@ const updateCity = async (req, res) => {
 };
 
 app.delete("/api/cities/:id", (req, res) => {
-  const id = parseInt(req.params.id);
-  const city = cities.find((cityCheck) => cityCheck._id === id);
-
-  if (!city) {
-    res.status(404).send("The city not found");
-  }
-  const index = cities.indexOf(city);
-  cities.splice(index, 1);
-  res.send(city);
+  deleteCity(res, req.params.id);
 });
+
+const deleteCity = async (res, id) => {
+  const city = await City.findByIdAndDelete(id);
+  res.send(city);
+};
 
 const validateCity = (city) => {
   const citySchema = joi.object({
