@@ -146,9 +146,11 @@ const addCity = async (e) => {
   }
 
   if (form._id.value != -1) {
-    displayDetails(response);
+    //displayDetails(response);
     result.innerHTML = "City updated successfully";
     result.style.color = "green";
+    const city = await getCity(form._id.value);
+    displayDetails(city);
     showCities();
     setTimeout(() => {
       result.innerHTML = "";
@@ -156,11 +158,21 @@ const addCity = async (e) => {
   }
 };
 
+// Ran into issue with updating after editing...found fix on
+// Portia's github
+const getCity = async (id) => {
+  let response = await fetch(`/api/cities/${id}`);
+  if (response.status != 200) {
+    console.log("ERROR: City not found");
+    return;
+  }
+  return await response.json();
+};
+
 const populateForm = (city) => {
   const form = document.getElementById("add-city-form");
   form._id.value = city._id;
   form.cityName.value = city.name;
-  console.log(city.name);
   form.country.value = city.country;
   form.population.value = city.population;
   form.prominentLanguage.value = city.prominentLanguage;

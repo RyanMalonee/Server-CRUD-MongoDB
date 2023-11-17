@@ -77,23 +77,27 @@ const createCity = async (res, city) => {
 };
 
 app.put("/api/cities/:id", upload.single("img"), (req, res) => {
-  const id = parseInt(req.params.id);
-  const city = cities.find((cityCheck) => cityCheck._id === id);
-
   const result = validateCity(req.body);
   if (result.error) {
     res.status(400).send(result.error.details[0].message);
     return;
   }
-  // update city details
-  city.name = req.body.name;
-  city.country = req.body.country;
-  city.population = req.body.population;
-  city.prominentLanguage = req.body.prominentLanguage;
-  city.landmarks = req.body.landmarks.split(",");
-  city.funFact = req.body.funFact;
-  res.send(city);
+  updateCity(req, res);
 });
+
+const updateCity = async (req, res) => {
+  let fields = {
+    name: req.body.name,
+    country: req.body.country,
+    population: req.body.population,
+    prominentLanguage: req.body.prominentLanguage,
+    landmarks: req.body.landmarks.split(","),
+    funFact: req.body.funFact,
+  };
+
+  const result = await City.updateOne({ _id: req.params.id }, fields);
+  res.send(result);
+};
 
 app.delete("/api/cities/:id", (req, res) => {
   const id = parseInt(req.params.id);
