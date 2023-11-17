@@ -1,0 +1,262 @@
+/* Structure */
+:root {
+  --background: #c4e1f2;
+  --columns: #85c8f2;
+  --cities: #1d3759;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+body {
+  background: var(--background);
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.column {
+  margin: 20px;
+  background-color: var(--columns);
+}
+
+.column:not(#cities section):not(#details section) {
+  box-shadow: 8px 10px var(--cities);
+}
+
+#cities,
+#details {
+  padding: 5px;
+  min-height: 400px;
+}
+
+#cities section {
+  background-color: var(--cities);
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+
+#cities section:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
+}
+
+#addCity {
+  background-color: var(--cities);
+  border: 2px solid white;
+  border-radius: 2px;
+  width: 250px;
+  max-width: 100%;
+  padding: 10px;
+  margin: 5px;
+}
+
+#form-submit-button,
+#delete-confirmation button {
+  background-color: var(--cities);
+  border: 3px solid white;
+  width: 200px;
+  height: 40px;
+}
+
+#addCity:hover {
+  background: var(--columns);
+  color: black;
+}
+
+#form {
+  width: 50%;
+  height: 25%;
+  background: white;
+}
+
+.hide {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn ease 0.5s;
+}
+
+.fade-out {
+  animation: fadeOut ease 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#add-city-form,
+#delete-confirmation {
+  background-color: var(--cities);
+  border: 3px solid white;
+  width: 50%;
+  margin: 10px auto;
+  border-radius: 3px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#delete-confirmation {
+  padding: 10px;
+}
+
+#delete-confirmation button {
+  margin: 10px;
+}
+
+#add-city-form p {
+  padding: 10px;
+  margin: 5px;
+}
+
+#add-city-form label {
+  display: inline-block;
+  width: 225px;
+}
+
+#add-city-form input {
+  width: 300px;
+  height: 30px;
+}
+
+#add-city-form input,
+#add-city-form label {
+  max-width: 100%;
+}
+
+#add-city-form h1 {
+  padding: 10px;
+}
+
+#cities a {
+  cursor: pointer;
+}
+
+#exit-button {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+#exit-button:hover {
+  color: var(--background);
+}
+
+#form-submit-button:hover,
+#delete-confirmation button:hover {
+  background: var(--background);
+  color: black;
+}
+
+#result {
+  text-align: center;
+  font-size: 1.4em;
+}
+
+/*Typography*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#title {
+  font-size: 2.5em;
+}
+
+h1 {
+  text-align: center;
+}
+
+#cities section a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+}
+
+#details section h2 {
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.icon {
+  padding: 5px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+#details section p {
+  font-size: 1.5em;
+}
+
+#addCity {
+  font-size: large;
+  color: white;
+}
+
+#add-city-form {
+  color: white;
+}
+
+#add-city-form label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#form-submit-button,
+#delete-confirmation button {
+  font-size: large;
+  color: white;
+}
+
+#delete-confirmation {
+  color: white;
+}
+
+input::placeholder {
+  color: rgb(202, 202, 202);
+}
+
+/* Larger Resolutions */
+@media only screen and (min-width: 600px) {
+  .flex-container {
+    display: flex;
+  }
+
+  .column {
+    flex: 1;
+  }
+
+  #cities section {
+    flex-wrap: wrap;
+    flex: 20%;
+  }
+
+  #cities {
+    flex-wrap: wrap;
+  }
+}
