@@ -20,6 +20,13 @@ const showCities = async () => {
     section.classList.add("column");
     a.href = "#";
     a.innerHTML = city.name;
+
+    if (city.img) {
+      const img = document.createElement("img");
+      img.src = city.img;
+      section.append(img);
+    }
+
     document.getElementById("cities").append(section);
     a.onclick = (e) => {
       e.preventDefault();
@@ -37,6 +44,12 @@ displayDetails = (city) => {
   const h2 = document.createElement("h2");
   h2.innerHTML = city.name;
   section.append(h2);
+
+  if (city.img) {
+    const img = document.createElement("img");
+    img.src = city.img;
+    section.append(img);
+  }
 
   const p = document.createElement("p");
   p.innerHTML = `Country: ${city.country}`;

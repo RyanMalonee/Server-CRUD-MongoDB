@@ -36,13 +36,13 @@ mongoose
   });*/
 
 const citySchema = new mongoose.Schema({
-  /*_id: mongoose.SchemaTypes.ObjectId,*/
   name: String,
   country: String,
   population: Number,
   prominentLanguage: String,
   landmarks: [String],
   funFact: String,
+  img: String,
 });
 
 const City = mongoose.model("City", citySchema);
@@ -67,6 +67,10 @@ app.post("/api/cities", upload.single("img"), (req, res) => {
     landmarks: req.body.landmarks.split(","),
     funFact: req.body.funFact,
   });
+
+  if (req.file) {
+    city.img = "images/" + req.file.filename;
+  }
 
   createCity(res, city);
 });
@@ -94,6 +98,10 @@ const updateCity = async (req, res) => {
     landmarks: req.body.landmarks.split(","),
     funFact: req.body.funFact,
   };
+  console.log(req.file.filename);
+  if (req.file) {
+    fields.img = "images/" + req.file.filename;
+  }
 
   const result = await City.updateOne({ _id: req.params.id }, fields);
   res.send(result);
@@ -117,6 +125,11 @@ const validateCity = (city) => {
     prominentLanguage: joi.string().min(4).required(),
     landmarks: joi.string().min(4).required(),
     funFact: joi.string().required(),
+    // Found out that sense it is passed in as an object,
+    // you dive in further to it to ensure it has a filename
+    img: joi.object({
+      filename: joi.string().required(),
+    }),
   });
 
   return citySchema.validate(city);
