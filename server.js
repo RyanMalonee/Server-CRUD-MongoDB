@@ -26,15 +26,6 @@ mongoose
     console.log("Couldn't connect to MongoDB", error);
   });
 
-/*mongoose
-  .connect("mongodb://localhost/cities")
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("Couldn't connect to MongoDB", error);
-  });*/
-
 const citySchema = new mongoose.Schema({
   name: String,
   country: String,
@@ -98,7 +89,7 @@ const updateCity = async (req, res) => {
     landmarks: req.body.landmarks.split(","),
     funFact: req.body.funFact,
   };
-  console.log(req.file.filename);
+
   if (req.file) {
     fields.img = "images/" + req.file.filename;
   }
