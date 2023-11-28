@@ -57,6 +57,7 @@ app.post("/api/cities", upload.single("img"), (req, res) => {
     prominentLanguage: req.body.prominentLanguage,
     landmarks: req.body.landmarks.split(","),
     funFact: req.body.funFact,
+    img: String,
   });
 
   if (req.file) {
